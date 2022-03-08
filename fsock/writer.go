@@ -22,8 +22,8 @@ func NewWriter (underlying io.Writer) (reader *Writer) {
 /* Flush writes the currently active frame, and clears the internal buffer. It
  * reports any errors emitted by the underlying io.Writer.
  */
-func (writer *Writer) Flush (data []byte) (err error) {
-        _, err = writer.WriteFrame(data)
+func (writer *Writer) Flush () (err error) {
+        _, err = writer.WriteFrame(writer.buffer)
         writer.Reset()
         return err
 }

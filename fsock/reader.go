@@ -27,9 +27,10 @@ func NewReader (raw io.Reader) (reader *Reader) {
  */
 func (reader *Reader) Read () (data []byte, err error) {
         // read frame length
-        var frameLen uint32
-        err = binary.Read(reader.underlying, binary.BigEndian, frameLen)
+        frameBytes := make([]byte, 4)
+        _, err = reader.underlying.Read(frameBytes)
         if err != nil { return nil, err }
+        frameLen := binary.BigEndian.Uint32(frameBytes)
         
         // read actual data
         data = make([]byte, frameLen)
