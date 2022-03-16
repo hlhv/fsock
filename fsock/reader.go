@@ -2,23 +2,20 @@ package fsock
 
 import (
         "io"
-        "bufio"
         "encoding/binary"
 )
 
 /* Reader is an object that reads entire fsock frames from an io.Reader.
  */
 type Reader struct {
-        underlying *bufio.Reader
+        underlying io.Reader
 }
 
 /* NewReader constructs a new fsock reader from an io.Reader.
  */
-func NewReader (raw io.Reader) (reader *Reader) {
-        underlying := bufio.NewReader(raw)
-        
+func NewReader (underlying io.Reader) (reader *Reader) {
         return &Reader {
-                underlying,
+                underlying: underlying,
         }
 }
 
@@ -28,13 +25,14 @@ func NewReader (raw io.Reader) (reader *Reader) {
 func (reader *Reader) Read () (data []byte, err error) {
         // read frame length
         frameBytes := make([]byte, 4)
-        _, err = reader.underlying.Read(frameBytes)
+        _, err = io.ReadFull(reader.underlying, frameBytes)
         if err != nil { return nil, err }
+        
         frameLen := binary.BigEndian.Uint32(frameBytes)
         
         // read actual data
         data = make([]byte, frameLen)
-        _, err = reader.underlying.Read(data)
+        _, err = io.ReadFull(reader.underlying, data)
         if err != nil { return nil, err }
         
         return data, nil
