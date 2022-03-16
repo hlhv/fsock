@@ -6,7 +6,7 @@ Simple socket framing module for HLHV.
 
 First, you need to install the module,
 
-`go get github.com/hlhv/fsock/fsock`
+`go get github.com/hlhv/fsock`
 
 And require it.
 
