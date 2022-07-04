@@ -1,5 +1,7 @@
 # fsock
 
+[![A+ Golang report card.](https://img.shields.io/badge/go%20report-A+-brightgreen.svg?style=flat)](https://goreportcard.com/report/github.com/hlhv/fsock)
+
 Simple socket framing module for HLHV.
 
 ## How to use
