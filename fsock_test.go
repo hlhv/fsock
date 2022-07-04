@@ -57,12 +57,12 @@ func TestWrite (t *testing.T) {
                 t.Error(err)
                 return
         }
-        t.Log("Wrote successfuly")
+        t.Log("Wrote successfully")
 
         t.Log(buffer.Bytes())
 
         if readData(buffer, t) {
-                t.Log("Read successfuly")
+                t.Log("Read successfully")
         }
 }
 
@@ -91,12 +91,12 @@ func TestWriteFrame (t *testing.T) {
                 t.Error(err)
                 return
         }
-        t.Log("Wrote successfuly")
+        t.Log("Wrote successfully")
 
         t.Log(buffer.Bytes())
 
         if readData(buffer, t) {
-                t.Log("Read successfuly")
+                t.Log("Read successfully")
         }
 }
 
